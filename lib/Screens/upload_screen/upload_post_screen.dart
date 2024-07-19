@@ -11,8 +11,8 @@ import 'package:instagram_flutter/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class UploadPostScreen extends StatefulWidget {
-  File _file;
-  UploadPostScreen(this._file,{super.key});
+  final File _file;
+  const UploadPostScreen(this._file,{super.key});
 
   @override
   State<UploadPostScreen> createState() => _UploadPostScreenState();

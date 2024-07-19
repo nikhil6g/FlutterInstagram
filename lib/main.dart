@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram_flutter/Screens/login_screen.dart';
-import 'package:instagram_flutter/Screens/signup_screen.dart';
 import 'package:instagram_flutter/provider/user_provider.dart';
 import 'package:instagram_flutter/resources/auth_methods.dart';
 import 'package:instagram_flutter/responsive/mobile_screen_layout.dart';

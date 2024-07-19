@@ -52,7 +52,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     List<Widget> homeScreenItem=[
       const FeedScreen(),
       const SearchScreen(),
-      const AddPostScreen(),
+      const UploadScreen(),
       const Text("reel"),
       ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid),
     ];
