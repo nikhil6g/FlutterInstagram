@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
   
   getData() async{
-    print(1);
+    //print(1);
     setState(() {
       isLoading=true;
     });

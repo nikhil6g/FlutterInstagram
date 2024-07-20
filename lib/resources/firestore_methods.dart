@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:instagram_flutter/model/post.dart';
+import 'package:instagram_flutter/model/reel.dart';
 import 'package:instagram_flutter/resources/storage_method.dart';
 import 'package:uuid/uuid.dart';
 
@@ -38,6 +39,36 @@ class FirestoreMethods{
     }
     return res;
   }
+
+  Future<String> uploadReel(
+    String description,
+    Uint8List file,
+    String uid,
+    String username,
+    String profImage,
+  ) async{
+    String res="Some error occured";
+    try{
+      String reelId= const Uuid().v4();
+      String reelUrl=await StorageMethods().uploadImage('reels', file, true);
+      Reel reel=Reel(
+        description: description,
+        uid: uid, 
+        username: username, 
+        reelId: reelId, 
+        datePublished: DateTime.now(), 
+        profImage: profImage, 
+        likes: [], 
+        reelUrl: reelUrl
+      );
+      _firestore.collection('reels').doc(reelId).set(reel.toJson(),);
+      res='success';
+    }catch(err){
+      res=err.toString();
+    }
+    return res;
+  }
+
 
   Future<void> likePosts(String postId,String uid,List likes) async {
     try{

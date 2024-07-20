@@ -23,8 +23,17 @@ class _PostScreenState extends State<PostScreen> {
   _fetchNewMedia()async{
     lastPage=currentPage;
     
-    final PermissionState ps = await PhotoManager.requestPermissionExtend();
-    print(ps.isAuth);
+    final PermissionState ps = await PhotoManager.requestPermissionExtend(
+      requestOption: const PermissionRequestOption(
+        androidPermission: AndroidPermission(
+          type: RequestType.image, mediaLocation: true,
+        )
+      )
+    );
+    if(ps==PermissionState.denied){
+      await PhotoManager.openSetting();
+    }
+    print(ps);
     if(ps.isAuth){
       List<AssetPathEntity> album =await PhotoManager.getAssetPathList(type: RequestType.image);
       List<AssetEntity> media =await album[0].getAssetListPaged(page: currentPage, size: 60);

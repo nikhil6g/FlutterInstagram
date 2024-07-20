@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/Screens/upload_screen/upload_reel_screen.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -51,7 +52,41 @@ class _ReelScreenState extends State<ReelScreen> {
                           snapshot.data!,
                           fit: BoxFit.cover,
                         )
-                      )
+                      ),
+                      if(asset.type == AssetType.video)
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            width:35,
+                            height: 15,
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                Text(
+                                  asset.videoDuration.inMinutes.toString(),
+                                  style:const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                  ),
+                                ),
+                                const Text(
+                                  ':',
+                                  style:TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                  ),
+                                ),
+                                Text(
+                                  asset.videoDuration.inSeconds.toString(),
+                                  style:const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
                     ],
                   )
                 );
@@ -86,6 +121,32 @@ class _ReelScreenState extends State<ReelScreen> {
         centerTitle: false,
         backgroundColor: mobileBackgroundColor,
         elevation: 0,
+      ),
+      body: SafeArea(
+        child: GridView.builder(
+          shrinkWrap: true,
+          itemCount: _mediaList.length,
+          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisExtent: 250,
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 5
+          ), 
+          itemBuilder: (context,index){
+            return GestureDetector(
+              onTap: (){
+                setState(() {
+                  chooseReelIndex=index;
+                  _file = path[chooseReelIndex];
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context)=>UploadReelScreen(_file!))
+                  );
+                });
+              },
+              child: _mediaList[index]
+            );
+          }
+        )
       ),
     );
   }

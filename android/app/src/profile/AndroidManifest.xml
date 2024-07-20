@@ -1,4 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Android 12 or below -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="32"/>
+    
+    <!-- Android 13(sdk 33) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+
+    <!-- Android 14(sdk 34) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/>
+
+    <application
+        tools:replace="android:label, android:icon, android:allowBackup"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/backup_rules_android_11_and_below"
+        android:dataExtractionRules="@xml/backup_rules_android_12_and_above"
+        android:fullBackupOnly="false"
+        android:hasFragileUserData="false"
+        android:requestLegacyExternalStorage="true">
+    </application>
 </manifest>

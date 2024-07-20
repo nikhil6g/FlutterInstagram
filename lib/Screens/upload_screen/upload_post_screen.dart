@@ -102,7 +102,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
             const LinearProgressIndicator() 
             :
             const Padding(padding: EdgeInsets.only(top:0)),
-            const Divider(),
+            //const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 5),
               child: Row(

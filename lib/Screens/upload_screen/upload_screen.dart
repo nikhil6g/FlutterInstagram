@@ -1,6 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:instagram_flutter/utils/gloabal_variables.dart';
+import 'package:instagram_flutter/utils/utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -12,9 +15,60 @@ class UploadScreen extends StatefulWidget {
 class _UploadScreenState extends State<UploadScreen> {
   late PageController uploadController;
   int _currentIndex=0;
+  
+  /*Future<void> getPermission() async{
+    var status = await Permission.photos.request();
+    print(status);
+    if(status==PermissionStatus.granted){
+      debugPrint("permission granted");
+    }else if(status==PermissionStatus.denied){
+      debugPrint("permission denied");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:const Text('Cannot Access storage'),
+          action: SnackBarAction(
+            label: 'Open App Settings', 
+            onPressed: (){
+              openAppSettings();
+            }
+          ),
+        )
+      );
+    }else if(status==PermissionStatus.limited){
+
+    }else if(status==PermissionStatus.restricted){
+      debugPrint("Permission restricted");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:const Text('Allow us to use storage'),
+          action: SnackBarAction(
+            label: 'Open App Settings', 
+            onPressed: (){
+              openAppSettings();
+            }
+          ),
+        )
+      );
+    }else if(status==PermissionStatus.permanentlyDenied){
+      debugPrint("Permission permanantly denied");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:const Text('Can\'t use storage'),
+          action: SnackBarAction(
+            label: 'Open App Settings', 
+            onPressed: (){
+              openAppSettings();
+            }
+          ),
+        )
+      );
+    }
+  }
+ */
   @override
   void initState() {
     super.initState();
+    //getPermission();
     uploadController=PageController();
   }
   @override
