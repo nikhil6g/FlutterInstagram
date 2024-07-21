@@ -8,8 +8,9 @@ import 'package:instagram_flutter/widgets/comment_card.dart';
 import 'package:provider/provider.dart';
 
 class CommentScreen extends StatefulWidget {
-  final String postId;
-  const CommentScreen({super.key,required this.postId});
+  final String childName;
+  final String id;
+  const CommentScreen({super.key,required this.id,required this.childName});
 
   @override
   State<CommentScreen> createState() => _CommentScreenState();
@@ -32,7 +33,7 @@ class _CommentScreenState extends State<CommentScreen> {
         centerTitle: false,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('posts').doc(widget.postId).collection('comments').orderBy('datePublished',descending: true).snapshots(), 
+        stream: FirebaseFirestore.instance.collection(widget.childName).doc(widget.id).collection('comments').orderBy('datePublished',descending: true).snapshots(), 
         builder: (context,snapshot){
           if(snapshot.connectionState==ConnectionState.waiting){
             return const Center(
@@ -77,7 +78,8 @@ class _CommentScreenState extends State<CommentScreen> {
               InkWell(
                 onTap: ()async{
                   await FirestoreMethods().postComment(
-                    widget.postId, 
+                    widget.childName,
+                    widget.id, 
                     _commentController.text, 
                     user.uid, 
                     user.username, 

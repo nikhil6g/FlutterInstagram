@@ -79,10 +79,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
           IconButton(
             onPressed: ()=>navigationTapped(3), 
             
-            icon: Icon(
-              Icons.video_file,
-              color: _page == 3?primaryColor:secondaryColor,
-            ),
+            icon: Image.asset('assets/instagram-reels-icon.png',height: 20,color:_page==3?Colors.white: Colors.white54,),
           ),
           IconButton(
             onPressed: ()=>navigationTapped(4), 

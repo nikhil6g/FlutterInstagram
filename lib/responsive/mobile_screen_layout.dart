@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/Screens/add_post_screen.dart';
+import 'package:instagram_flutter/Screens/explore_screen.dart';
 import 'package:instagram_flutter/Screens/upload_screen/upload_screen.dart';
 import 'package:instagram_flutter/Screens/feed_screen.dart';
 import 'package:instagram_flutter/Screens/profile_screen.dart';
@@ -53,7 +54,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       const FeedScreen(),
       const SearchScreen(),
       const UploadScreen(),
-      const Text("reel"),
+      const ExploreScreen(),
       ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid),
     ];
     //print('Welcome to mobile screen');
@@ -66,36 +67,42 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         onPageChanged: onPageChanged,
         children: homeScreenItem,
       ),
-      bottomNavigationBar: CupertinoTabBar(
-        backgroundColor:const Color.fromARGB(255, 28, 28, 28),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: _page==0? primaryColor:secondaryColor),
-            label: "home",
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search,color: _page==1? primaryColor:secondaryColor),
-            label: "search",
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle,color: _page==2? primaryColor:secondaryColor),
-            label: "upload",
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_file,color: _page==3? primaryColor:secondaryColor),
-            label: "reel",
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person,color: _page==4? primaryColor:secondaryColor),
-            label: "dp",
-            backgroundColor: primaryColor,
-          ),
-        ],
-        onTap: navigationTapped,
+      bottomNavigationBar: Container(
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: secondaryColor,
+          backgroundColor:const Color.fromARGB(255, 28, 28, 28),
+          currentIndex: _page,
+          items: [
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "home",
+              backgroundColor: primaryColor,
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.search,),
+              label: "search",
+              backgroundColor: primaryColor,
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle,),
+              label: "upload",
+              backgroundColor: primaryColor,
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset('assets/instagram-reels-icon.png',height: 20,color:_page==3?Colors.white: Colors.white54,),
+              label: "explore",
+              backgroundColor: primaryColor,
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.person,),
+              label: "dp",
+              backgroundColor: primaryColor,
+            ),
+          ],
+          onTap: navigationTapped,
+        ),
       )
     );
   }

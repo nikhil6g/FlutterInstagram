@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/Screens/add_post_screen.dart';
+import 'package:instagram_flutter/Screens/explore_screen.dart';
 import 'package:instagram_flutter/Screens/upload_screen/upload_screen.dart';
 import 'package:instagram_flutter/Screens/upload_screen/post_screen.dart';
 import 'package:instagram_flutter/Screens/upload_screen/reel_screen.dart';
@@ -18,6 +19,6 @@ List<Widget> homeScreenItems = [
   const FeedScreen(),
   const SearchScreen(),
   const UploadScreen(),
-  const Text("reel"),
+  const ExploreScreen(),
   ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid),
 ];

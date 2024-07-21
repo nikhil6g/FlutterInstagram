@@ -117,7 +117,8 @@ class _PostCardState extends State<PostCard> {
           ),
           GestureDetector(
             onDoubleTap: ()async{
-              await FirestoreMethods().likePosts(
+              await FirestoreMethods().like(
+                'posts',
                 widget.snap['postId'],
                 user.uid,
                 widget.snap['likes']
@@ -167,7 +168,8 @@ class _PostCardState extends State<PostCard> {
                 smallLike: true,
                 child: IconButton(
                   onPressed: ()async {
-                    await FirestoreMethods().likePosts(
+                    await FirestoreMethods().like(
+                      'posts',
                       widget.snap['postId'],
                       user.uid,
                       widget.snap['likes']
@@ -188,7 +190,10 @@ class _PostCardState extends State<PostCard> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => CommentScreen(postId: widget.snap['postId'].toString()),
+                      builder: (context) => CommentScreen(
+                        id: widget.snap['postId'].toString(),
+                        childName: 'posts',
+                      ),
                     )
                   );
                 },

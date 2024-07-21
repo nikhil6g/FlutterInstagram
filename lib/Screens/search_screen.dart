@@ -27,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
     //print(1);
     return FirebaseFirestore.instance
                   .collection('posts')
-                  .orderBy('datePublished')
+                  .orderBy('datePublished',descending: true)
                   .get();
   }
 
@@ -87,9 +87,12 @@ class _SearchScreenState extends State<SearchScreen> {
           StaggeredGridView.countBuilder(
             crossAxisCount: 3,
             itemCount: (snap.data! as dynamic).docs.length, 
-            itemBuilder: (context,index)=> Image.network(
-              (snap.data! as dynamic).docs[index]['postUrl'],
-              fit: BoxFit.cover,
+            itemBuilder: (context,index)=> GestureDetector(
+              onTap: (){},
+              child: Image.network(
+                (snap.data! as dynamic).docs[index]['postUrl'],
+                fit: BoxFit.cover,
+              ),
             ),
             staggeredTileBuilder: (index) => width>webScreenSize? 
             StaggeredTile.count(

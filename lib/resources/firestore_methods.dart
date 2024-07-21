@@ -69,15 +69,15 @@ class FirestoreMethods{
     return res;
   }
 
-
-  Future<void> likePosts(String postId,String uid,List likes) async {
+  //liking posts or reels
+  Future<void> like(String childName,String id,String uid,List likes) async {
     try{
       if(likes.contains(uid)){
-        await _firestore.collection('posts').doc(postId).update({
+        await _firestore.collection(childName).doc(id).update({
           'likes':FieldValue.arrayRemove([uid]),
         });
       }else{
-        await _firestore.collection('posts').doc(postId).update({
+        await _firestore.collection(childName).doc(id).update({
           'likes':FieldValue.arrayUnion([uid]),
         });
       }
@@ -87,11 +87,11 @@ class FirestoreMethods{
   }
 
   //for commenting
-  Future<void> postComment(String postId,String text,String uid,String name,String profilePic) async{
+  Future<void> postComment(String childName,String id,String text,String uid,String name,String profilePic) async{
     try{
       if(text.isNotEmpty){
         String commentId= const Uuid().v1();
-        await _firestore.collection('posts').doc(postId).collection('comments').doc(commentId).set({
+        await _firestore.collection(childName).doc(id).collection('comments').doc(commentId).set({
           'profilePic':profilePic,
           'name':name,
           'uid':uid,
